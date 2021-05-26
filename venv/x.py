@@ -1,4 +1,5 @@
-#
+#"בשם ה נעשה ונצליח
+
 
 file_name = 'lena.bmp';
 cover_image = imread(file_name);
