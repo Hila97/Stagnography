@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="890c2ca0-bdf1-448e-8b84-b9f4c0587c94" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/venv/lama.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lena.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/vv.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/baboon.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/x.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/x.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/lama.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/lama.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,11 +147,18 @@
       <option name="presentableId" value="LOCAL‎00003" />
       <updated>1622012991052</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL‎00004" summary="from image to matrix numbers&#10;from matrix to image">
+      <created>1622144792828</created>
+      <option name="number" value="LOCAL‎00004" />
+      <option name="presentableId" value="LOCAL‎00004" />
+      <updated>1622144792828</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="start" />
-    <option name="LAST_COMMIT_MESSAGE" value="start" />
+    <MESSAGE value="from image to matrix numbers&#10;from matrix to image" />
+    <option name="LAST_COMMIT_MESSAGE" value="from image to matrix numbers&#10;from matrix to image" />
   </component>
 </project>
