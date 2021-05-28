@@ -1,6 +1,7 @@
 from PIL import Image
+import numpy as np
 
-img = Image.open('lena.png').convert('L')  # convert image to 8-bit grayscale
+img = Image.open('eggs.png').convert('L')  # convert image to 8-bit grayscale
 WIDTH, HEIGHT = img.size
 
 data = list(img.getdata()) # convert image data to a list of integers
@@ -14,26 +15,28 @@ data = [data[offset:offset+WIDTH] for offset in range(0, WIDTH*HEIGHT, WIDTH)]
 
 
 
-import numpy as np
 length=len(data)
-A = np.vstack([data, data[0]])
-
-
-##add one line , to be divided by 3
-nmpy_matrix=np.matrix(data) #from matrix to numpy
-new_row=nmpy_matrix[length-1] #equal to the last row
-A = np.concatenate((nmpy_matrix,new_row)) #add the last row again
-B = np.insert(A, length, values=A[:,length-1], axis=1)#add the last col again
-
-length=len(B)
 # print(length)
+# print(len(data[0]))
 
 
-matrix = B.tolist()
-for i in range(0,length-1,3):
-    for j in range(length -1):
-        print(matrix[i][j], end =" ")
-    print()
+def paddingOneByOne(sourceMatrix):
+    ##add one line , to be divided by 3
+    nmpy_matrix=np.matrix(sourceMatrix) #from matrix to numpy
+    new_row=nmpy_matrix[length-1] #equal to the last row
+    A = np.concatenate((nmpy_matrix,new_row)) #add the last row again
+    B = np.insert(A, length, values=A[:,length-1], axis=1)#add the last col again
+    B# is numpy object
+    return B.tolist() #python list
+
+
+matrix=data
+
+
+# for i in range(length):
+#     for j in range(length ):
+#         print(matrix[i][j], end =" ")
+#     print()
 
 
 
@@ -44,11 +47,11 @@ def startBlock(matrix,startRow,startCol):
         print()
 
 
-#skip 3
-# for i in range(0,length-1,3):
-#     for j in range(0,length-1,3):
-#         startBlock(matrix,i,j)
-#         print()
+# skip 3
+for i in range(0,length-1,3):
+    for j in range(0,length-1,3):
+        startBlock(matrix,i,j)
+        print()
 
 
 
