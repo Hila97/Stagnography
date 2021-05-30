@@ -1,6 +1,8 @@
 from PIL import Image
+import matplotlib.pyplot as plt
+import numpy as np
 
-img = Image.open('lena.png').convert('L')  # convert image to 8-bit grayscale
+img = Image.open('eggs.png').convert('L')  # convert image to 8-bit grayscale
 WIDTH, HEIGHT = img.size
 
 data = list(img.getdata())  # convert image data to a list of integers
@@ -8,47 +10,31 @@ data = list(img.getdata())  # convert image data to a list of integers
 data = [data[offset:offset + WIDTH] for offset in range(0, WIDTH * HEIGHT, WIDTH)]
 
 # At this point the image's pixels are all in memory and can be accessed
-# individually using data[row][col].
-print(data[0][0])
 # For example:
+print("pic 1")
 for row in data:
     print(' '.join('{:3}'.format(value) for value in row))
 
-# # Here's another more compact representation.
-# chars = '@%#*+=-:. '  # Change as desired.
-# scale = (len(chars)-1)/255.
-# print()
-# for row in data:
-#     print(' '.join(chars[int(value*scale)] for value in row))
-import matplotlib.pyplot as plt
-import numpy as np
-
-# X = np.random.random((100, 100))  # sample 2D array
 X = data
-plt.imshow(X, cmap="gray")
-plt.show()
+# convert the list back to image
+array = np.array(data, dtype='uint8')
+new_image = Image.fromarray(array, 'L')
+new_image.save('testing2.png')
 
-test_str = "this is a try"
-print("The original string is : " + str(test_str))
-res = ''.join(format(ord(i), '08b') for i in test_str)
-print("The string after binary conversion : " + str(res))
+# plt.imshow(X, cmap="gray")
+# plt.show()
+# check testing.png
+img2 = Image.open('testing2.png').convert('L')  # convert image to 8-bit grayscale
+WIDTH2, HEIGHT2 = img2.size
+data2 = list(img.getdata())
+data2 = [data2[offset:offset + WIDTH2] for offset in range(0, WIDTH2 * HEIGHT2, WIDTH2)]
 
-
-def bits2a(b):
-    return ''.join(chr(int(''.join(x), 2)) for x in zip(*[iter(b)] * 8))
-
-
-print(bits2a(res))
-
-z = '0100011101100101011001010110101101110011'
-y = '10001111100101110010111010111110011'
-
-
-def bits2a(b):
-    return ''.join(chr(int(''.join(x), 2)) for x in zip(*[iter(b)] * 8))
+print("pic 2")
+for row in data2:
+    print(' '.join('{:3}'.format(value) for value in row))
 
 
-print(bits2a(z))
-print(bits2a(y))
-print(bits2a('0110100001100101011011000110110001101111'))
-print(bits2a('1100111010100111010111101001011001110'))
+def compare(a, b): return a == b
+
+
+print(compare(data, data2))
