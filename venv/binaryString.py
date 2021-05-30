@@ -1,4 +1,6 @@
-test_str = "this is a try"
+print('Enter the message')
+test_str = input()
+#test_str = "this is a try"
 print("The original string is : " + str(test_str))
 res = ''.join(format(ord(i), '08b') for i in test_str)
 print("The string after binary conversion : " + str(res))
