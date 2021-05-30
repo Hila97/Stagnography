@@ -1,5 +1,6 @@
 from PIL import Image
 import numpy as np
+
 size = 9
 
 k = 3
@@ -75,6 +76,7 @@ def startBlockEmbedding(matrix, startRow, startCol):  # the embedding process
     pir = matrix[startRow + 1][startCol + 1]  # the middle field= pir
     # step2
     lsbir = bin2dec(kLsb(dec2bin(pir)))  # take k rightmost LSBs of Pir
+
     sir = bin2dec(kMsb(position, k, secretInBinary))  # take k left-most bits of secret message
     position = k  # start to take bits from the secret messages
     print(sir)
@@ -145,22 +147,119 @@ def startBlockEmbedding(matrix, startRow, startCol):  # the embedding process
     Pm1 = []
     Pm1.append(0)
     for m in range(1, size):
-        if abs(P[m]-Pm2[m]) < abs(P[m]-Pm3[m]) and 0 <= Pm2[m] <= 255:
+        if abs(P[m] - Pm2[m]) < abs(P[m] - Pm3[m]) and 0 <= Pm2[m] <= 255:
             Pm1.append(Pm2[m])
-        elif abs(P[m]-Pm3[m]) < abs(P[m]-Pm2[m]) and 0 <= Pm3[m] <= 255:
+        elif abs(P[m] - Pm3[m]) < abs(P[m] - Pm2[m]) and 0 <= Pm3[m] <= 255:
             Pm1.append(Pm3[m])
         elif Pm3 > 255 and Pm2 > 0:
             Pm1.append(Pm2[m])
         elif Pm2 < 0 and Pm3 < 255:
             Pm1.append(Pm3[m])
     print(Pm1)
+    # copy and change the block
+    matrix[startRow][startCol] = Pm1[1]
+    matrix[startRow][startCol+1] = Pm1[2]
+    matrix[startRow][startCol+2] = Pm1[3]
+    matrix[startRow+1][startCol] = Pm1[4]
+    matrix[startRow + 1][startCol + 1] = p1ir
+    matrix[startRow+1][startCol+2] = Pm1[5]
+    matrix[startRow+2][startCol] = Pm1[6]
+    matrix[startRow+2][startCol+1] = Pm1[7]
+    matrix[startRow+2][startCol+2] = Pm1[8]
 
-#Extraction Process
+
+# Extraction Process
+def startBlockExtraction(matrix, startRow, startCol):
+    # step1
+    P1ir = matrix[startRow + 1][startCol + 1]
+    s1ir = bin2dec(kLsb(dec2bin(P1ir)))
+    # step2
+    P1m = []  # the length will be 9
+    P1m.append(0)  # to start from index 1
+    # p1
+    P1m.append(matrix[startRow][startCol])
+    # p2
+    P1m.append(matrix[startRow][startCol + 1])
+    # p3
+    P1m.append(matrix[startRow][startCol + 2])
+    # p4
+    P1m.append(matrix[startRow + 1][startCol])
+    # p5
+    P1m.append(matrix[startRow + 1][startCol + 2])  # Pay attention to the skip here beacause the middle box
+    # p6
+    P1m.append(matrix[startRow + 2][startCol])
+    # p7
+    P1m.append(matrix[startRow + 2][startCol + 1])
+    # p8
+    P1m.append(matrix[startRow + 2][startCol + 2])
+    D1m = []
+    D1m.append(0)
+    print(P1ir)
+    print(P1m)
+    for m in range(1, size):
+        D1m.append(abs(P1ir - P1m[m]))
+    print(D1m)
+
+    # step34
+    L = []
+    L.append(0)
+    t = []
+    t.append(0)
+    for index in range(1, size):
+        Lj, tj = rangeTableWithSundivisions(D1m[index])
+        L.append(Lj)
+        t.append(tj)
+    print(L)
+    print(t)
+    # step5
+    sm = []
+    sm.append(0)
+    for m in range(1, size):
+        sm.append(D1m[m] - L[m])
+    print(sm)
+    # step 6
+    # to binary
+    smbin = []
+    smbin.append(0)
+    for m in range(1, size):
+        smbin.append(dec2bin(sm[m]))
+    print(smbin)
+    # to string
+    message = ''
+    for m in range(1, size):
+        smbin[m] = str(smbin[m])
+        diffrence = t[m] - len(smbin[m])
+        if diffrence != 0 :
+            temp = ''
+            for i in range(diffrence):
+                temp += '0'
+            smbin[m] = temp + smbin[m]
+    print(smbin)
+    for m in range(1, size):
+        message += smbin[m]
+    print(message)
+    # compute the Kmsb of the message by the Klsb of p'ir
+    Kmsb = kLsb(dec2bin(P1ir))
+    message = str(Kmsb)+message
+    print(message)
+    return message
+
+
+
+
+
+
+
+
+
 
 secretInBinary = 1100111010100111010111101001011001110
 print(secretInBinary)
-try1 = [[80, 90, 120], [60, 100, 150], [95, 130, 170]]
-startBlockEmbedding(try1, 0, 0)
+imagei = [[80, 90, 120], [60, 100, 150], [95, 130, 170]]
+stego = imagei
+startBlockEmbedding(stego, 0, 0)
+print('&&&&&&&&&&&&&&&&')
+startBlockExtraction(stego, 0, 0)
 
 # for i in range(startRow,startRow+3,1):
 # #     for j in range(startCol,startCol+3,1):
