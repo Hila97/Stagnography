@@ -38,11 +38,15 @@ def kLsb(binaryNumber):#get binary number and return its k lsb in binary
     lsb=pow(10,k)
     return binaryNumber%lsb
 
-def kMsb(binaryNumber):#get binary number and return its k msb in binary
+def kMsb(startIndex,size,binaryNumber):#get binary number and return its k msb in binary
     length=len(str(binaryNumber))
-    x=length-k
-    msb=pow(10,x)
-    return binaryNumber//msb
+    toDivide=startIndex+size
+    x=length-toDivide
+    division=pow(10,x)
+    ans=binaryNumber//division
+    modulo=pow(10,size)
+    return ans%modulo
+
 
 
 def rangeTableWithSundivisions(Dm):#return lower limit, and t
@@ -59,13 +63,15 @@ def rangeTableWithSundivisions(Dm):#return lower limit, and t
 
 
 
-secretInBinary=11001110111010100111010111101001011001110
 def startBlockEmbedding(matrix,startRow,startCol): #the embedding process
+    position=0
     #step1
     pir=matrix[startRow+1][startCol+1] #the middle field= pir
     #step2
     lsbir=bin2dec(kLsb(dec2bin(pir)))#take k rightmost LSBs of Pir
-    sir=bin2dec(kMsb(dec2bin(secretInBinary)))#WAIT TO TAL----- #take k left-most bits of secret message
+    sir=bin2dec(kMsb(position,k,secretInBinary)) #take k left-most bits of secret message
+    position=k #start to take bits from the secret messages
+    print(sir)
     #step3
     p1ir = pir-lsbir+sir #p'ir
     #step4
@@ -110,10 +116,22 @@ def startBlockEmbedding(matrix,startRow,startCol): #the embedding process
         L.append(Lj)
         t.append(tj)
     #step7
+    print(L)
+    print(t)
+    D1 = []
+    D1.append(0)
+    for index in range(1,len(t)):
+        sm=bin2dec(kMsb(position,t[index],secretInBinary))
+        position+=t[index]
+        D1.append(L[index]+ sm)
+    print(D1)
+    #step8
 
 
-
-
+secretInBinary=1100111010100111010111101001011001110
+print(secretInBinary)
+try1=[[80,90,120],[60,100,150],[95,130,170]]
+startBlockEmbedding(try1,0,0)
 
 
 
@@ -142,11 +160,11 @@ length=len(matrix)
 
 
 
-# skip 3
-for i in range(0,length-1,3):
-    for j in range(0,length-1,3):
-        startBlockEmbedding(matrix,i,j)
-        # print()
+# skip 3 - run all the blocks
+# for i in range(0,length-1,3):
+#     for j in range(0,length-1,3):
+#         startBlockEmbedding(matrix,i,j)
+#         # print()
 
 
 
