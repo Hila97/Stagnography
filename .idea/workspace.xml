@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="890c2ca0-bdf1-448e-8b84-b9f4c0587c94" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/foo.png" beforeDir="false" afterPath="$PROJECT_DIR$/venv/foo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/lama.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/lama.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -171,13 +170,34 @@
       <option name="presentableId" value="LOCAL‎00005" />
       <updated>1622149819873</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL‎00006" summary="divide to blocks, exemple on eggs">
+      <created>1622204360645</created>
+      <option name="number" value="LOCAL‎00006" />
+      <option name="presentableId" value="LOCAL‎00006" />
+      <updated>1622204360645</updated>
+    </task>
+    <task id="LOCAL‎00007" summary="embbeding till step 6">
+      <created>1622214028504</created>
+      <option name="number" value="LOCAL‎00007" />
+      <option name="presentableId" value="LOCAL‎00007" />
+      <updated>1622214028504</updated>
+    </task>
+    <task id="LOCAL‎00008" summary="commit for tal">
+      <created>1622373151772</created>
+      <option name="number" value="LOCAL‎00008" />
+      <option name="presentableId" value="LOCAL‎00008" />
+      <updated>1622373151773</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="start" />
     <MESSAGE value="from image to matrix numbers&#10;from matrix to image" />
     <MESSAGE value="divide to blocks" />
-    <option name="LAST_COMMIT_MESSAGE" value="divide to blocks" />
+    <MESSAGE value="divide to blocks, exemple on eggs" />
+    <MESSAGE value="embbeding till step 6" />
+    <MESSAGE value="commit for tal" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit for tal" />
   </component>
 </project>
