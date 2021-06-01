@@ -104,7 +104,7 @@ def startBlockEmbedding(matrix, startRow, startCol):  # the embedding process
     # p4
     P.append(matrix[startRow + 1][startCol])
     # p5
-    P.append(matrix[startRow + 1][startCol + 2])  # Pay attention to the skip here beacause the middle box
+    P.append(matrix[startRow + 1][startCol + 2])  # Pay attention to the skip here because the middle box
     # p6
     P.append(matrix[startRow + 2][startCol])
     # p7
@@ -112,7 +112,7 @@ def startBlockEmbedding(matrix, startRow, startCol):  # the embedding process
     # p8
     P.append(matrix[startRow + 2][startCol + 2])
     # comupte D
-    for index in range(1, size):  # run thoreu 8
+    for index in range(1, size):  # run thorue 8
         D.append(abs(p1ir - P[index]))
     # step6
     L = []
@@ -151,9 +151,9 @@ def startBlockEmbedding(matrix, startRow, startCol):  # the embedding process
             Pm1.append(Pm2[m])
         elif abs(P[m] - Pm3[m]) < abs(P[m] - Pm2[m]) and 0 <= Pm3[m] <= 255:
             Pm1.append(Pm3[m])
-        elif Pm3 > 255 and Pm2 > 0:
+        elif Pm3[m] > 255 and Pm2[m] > 0:
             Pm1.append(Pm2[m])
-        elif Pm2 < 0 and Pm3 < 255:
+        elif Pm2[m] < 0 and Pm3[m] < 255:
             Pm1.append(Pm3[m])
     print(Pm1)
     # copy and change the block

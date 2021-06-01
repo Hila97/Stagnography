@@ -52,3 +52,23 @@ print(bits2a(z))
 print(bits2a(y))
 print(bits2a('0110100001100101011011000110110001101111'))
 print(bits2a('1100111010100111010111101001011001110'))
+
+import base64
+import requests
+
+my_url = 'lena.png'  # your url here
+
+
+def pass_image(image_url):
+    output = base64.b64encode(requests.get(image_url).content)
+    bin = "".join(format(ord(x), "b") for x in base64.decodestring(output))
+    print(bin)
+    return bin  # or you could print it
+
+
+len(pass_image(my_url))  # for the url I used, I got length of 387244
+
+import base64
+with open("lena.png", "rb") as img_file:
+    my_string = base64.b64encode(img_file.read())
+print(my_string)
