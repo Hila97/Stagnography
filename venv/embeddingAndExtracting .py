@@ -2,6 +2,7 @@ from PIL import Image
 import numpy as np
 
 size = 9
+
 k = 3
 
 
@@ -24,14 +25,21 @@ def printMatrix(data):
 
 def paddingOneByOne(sourceMatrix):
     ##add one line , to be divided by 3
+    length=len(sourceMatrix)
     nmpy_matrix = np.matrix(sourceMatrix)  # from matrix to numpy
     new_row = nmpy_matrix[length - 1]  # equal to the last row
     A = np.concatenate((nmpy_matrix, new_row))  # add the last row again
-    B = np.insert(A, length, values=A[:, length - 1], axis=1)  # add the last col again
-    B  # is numpy object
-    return B.tolist()  # python list
+    B=A.tolist()
+    print(B)
+    for i in range(len(B)):
+        B[i].append(B[i][length-1])
 
-mat=[],[]
+    # B = np.insert(A, length, values=A[:, length - 1], axis=1)  # add the last col again
+    # is numpy object
+    return   B
+
+
+
 def dec2bin(x):  # from decimal number
     return int(bin(x)[2:])
 
@@ -49,7 +57,7 @@ def kLsb(binaryNumber):  # get binary number and return its k lsb in binary
 def kMsb(startIndex, size, binaryNumber):  # get binary number and return its k msb in binary
     length = len(str(binaryNumber))
     toDivide = startIndex + size
-    x = length - toDivide
+    x = abs(length - toDivide)
     division = pow(10, x)
     ans = binaryNumber // division
     modulo = pow(10, size)
@@ -73,11 +81,14 @@ def startBlockEmbedding(matrix, startRow, startCol):  # the embedding process
     position = 0
     # step1
     pir = matrix[startRow + 1][startCol + 1]  # the middle field= pir
+    print("the pir is")
+    print(pir)
     # step2
     lsbir = bin2dec(kLsb(dec2bin(pir)))  # take k rightmost LSBs of Pir
 
     sir = bin2dec(kMsb(position, k, secretInBinary))  # take k left-most bits of secret message
     position = k  # start to take bits from the secret messages
+    print("this is the sir")
     print(sir)
     # step3
     p1ir = pir - lsbir + sir  # p'ir
@@ -103,7 +114,7 @@ def startBlockEmbedding(matrix, startRow, startCol):  # the embedding process
     # p4
     P.append(matrix[startRow + 1][startCol])
     # p5
-    P.append(matrix[startRow + 1][startCol + 2])  # Pay attention to the skip here because the middle box
+    P.append(matrix[startRow + 1][startCol + 2])  # Pay attention to the skip here beacause the middle box
     # p6
     P.append(matrix[startRow + 2][startCol])
     # p7
@@ -111,7 +122,7 @@ def startBlockEmbedding(matrix, startRow, startCol):  # the embedding process
     # p8
     P.append(matrix[startRow + 2][startCol + 2])
     # comupte D
-    for index in range(1, size):  # run thorue 8
+    for index in range(1, size):  # run thoreu 8
         D.append(abs(p1ir - P[index]))
     # step6
     L = []
@@ -123,14 +134,24 @@ def startBlockEmbedding(matrix, startRow, startCol):  # the embedding process
         L.append(Lj)
         t.append(tj)
     # step7
+    print("Ljm:")
     print(L)
+    print("tjm:")
     print(t)
     D1 = []
     D1.append(0)
     for index in range(1, size):
+        # print("1")
+        # print(position)
+        # print("2")
+        # print(t[index])
+        # print("1")
+        # print(secretInBinary)
         sm = bin2dec(kMsb(position, t[index], secretInBinary))
         position += t[index]
         D1.append(L[index] + sm)
+
+    print("D':")
     print(D1)
     # step8
     Pm2 = []
@@ -140,7 +161,9 @@ def startBlockEmbedding(matrix, startRow, startCol):  # the embedding process
     for index in range(1, size):
         Pm2.append(p1ir - D1[index])
         Pm3.append(p1ir + D1[index])
+    print("P''m:")
     print(Pm2)
+    print("P'''m")
     print(Pm3)
     # step9
     Pm1 = []
@@ -154,6 +177,7 @@ def startBlockEmbedding(matrix, startRow, startCol):  # the embedding process
             Pm1.append(Pm2[m])
         elif Pm2[m] < 0 and Pm3[m] < 255:
             Pm1.append(Pm3[m])
+    print("P'm:")
     print(Pm1)
     # copy and change the block
     matrix[startRow][startCol] = Pm1[1]
@@ -193,10 +217,13 @@ def startBlockExtraction(matrix, startRow, startCol):
     P1m.append(matrix[startRow + 2][startCol + 2])
     D1m = []
     D1m.append(0)
+    print("P'ir")
     print(P1ir)
+    print("P'm")
     print(P1m)
     for m in range(1, size):
         D1m.append(abs(P1ir - P1m[m]))
+    print("D'm:")
     print(D1m)
 
     # step34
@@ -208,13 +235,17 @@ def startBlockExtraction(matrix, startRow, startCol):
         Lj, tj = rangeTableWithSundivisions(D1m[index])
         L.append(Lj)
         t.append(tj)
+
+    print("Ljm:")
     print(L)
+    print("this is t")
     print(t)
     # step5
     sm = []
     sm.append(0)
     for m in range(1, size):
         sm.append(D1m[m] - L[m])
+    print("sm:")
     print(sm)
     # step 6
     # to binary
@@ -222,7 +253,7 @@ def startBlockExtraction(matrix, startRow, startCol):
     smbin.append(0)
     for m in range(1, size):
         smbin.append(dec2bin(sm[m]))
-    print(smbin)
+    #print(smbin)
     # to string
     message = ''
     for m in range(1, size):
@@ -233,14 +264,15 @@ def startBlockExtraction(matrix, startRow, startCol):
             for i in range(diffrence):
                 temp += '0'
             smbin[m] = temp + smbin[m]
-    print(smbin)
+    #print(smbin)
     for m in range(1, size):
         message += smbin[m]
-    print(message)
+    #print(message)
     # compute the Kmsb of the message by the Klsb of p'ir
     Kmsb = kLsb(dec2bin(P1ir))
     message = str(Kmsb)+message
-    print(message)
+    print("the message is:")
+    print (message)
     return message
 
 
@@ -251,10 +283,14 @@ def startBlockExtraction(matrix, startRow, startCol):
 
 
 
-
 secretInBinary = 1100111010100111010111101001011001110
+print(len(str(secretInBinary)))
+#secretInBinary = 1100111010100111010111101001011001110
 print(secretInBinary)
+
 imagei = [[80, 90, 120], [60, 100, 150], [95, 130, 170]]
+print("the first block is")
+print(imagei)
 stego = imagei
 startBlockEmbedding(stego, 0, 0)
 print('&&&&&&&&&&&&&&&&')
@@ -265,10 +301,12 @@ startBlockExtraction(stego, 0, 0)
 #         print(matrix[i][j],end=" ")
 #        print()
 
-
 matrix = converImgToMatrix('eggs.png')
+printMatrix(matrix)
+print("after adding of 1 row")
+printMatrix(paddingOneByOne(matrix))
 length = len(matrix)
-
+#printMatrix(matrix)
 # for i in range(length):
 #     for j in range(length ):
 #         print(matrix[i][j], end =" ")
