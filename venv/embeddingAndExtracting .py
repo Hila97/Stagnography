@@ -2,7 +2,6 @@ from PIL import Image
 import numpy as np
 
 size = 9
-
 k = 3
 
 
@@ -32,7 +31,7 @@ def paddingOneByOne(sourceMatrix):
     B  # is numpy object
     return B.tolist()  # python list
 
-
+mat=[],[]
 def dec2bin(x):  # from decimal number
     return int(bin(x)[2:])
 
