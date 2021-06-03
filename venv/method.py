@@ -1,6 +1,7 @@
 from PIL import Image
 import numpy as np
 from binaryString import *
+import matplotlib.pyplot as plt
 
 size = 9
 
@@ -59,7 +60,7 @@ def kMsb(startIndex, size, binaryNumber):  # get binary number and return its k 
     toDivide = startIndex + size
     x = abs(length - toDivide)
     division = pow(10, x)
-    ans = binaryNumber // division
+    ans = int(binaryNumber) // division
     modulo = pow(10, size)
     return ans % modulo
 
@@ -78,14 +79,18 @@ def rangeTableWithSundivisions(Dm):  # return lower limit, and t
 
 
 def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  # the embedding process
+    length=len(secretInBinary)
+
     # step1
     pir = matrix[startRow + 1][startCol + 1]  # the middle field= pir
 
     # step2
     lsbir = bin2dec(kLsb(dec2bin(pir)))  # take k rightmost LSBs of Pir
-
-    sir = bin2dec(kMsb(position, k, secretInBinary))  # take k left-most bits of secret message
-    position = k  # start to take bits from the secret messages
+    x=k
+    if position+k>length:
+        x=length-position
+    sir = bin2dec(kMsb(position, x, secretInBinary))  # take k left-most bits of secret message
+    position += x  # start to take bits from the secret messages
 
     # step3
     p1ir = pir - lsbir + sir  # p'ir
@@ -135,18 +140,14 @@ def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  
     D1 = []
     D1.append(0)
     for index in range(1, size):
-        # print("1")
-        # print(position)
-        # print("2")
-        # print(t[index])
-        # print("1")
-        # print(secretInBinary)
-        sm = bin2dec(kMsb(position, t[index], secretInBinary))
-        position += t[index]
+        x=t[index]
+        if position + t[index] > length:
+            x = length - position
+        sm = bin2dec(kMsb(position, x, secretInBinary))
+        position += x
         D1.append(L[index] + sm)
 
-    print("D':")
-    print(D1)
+
     # step8
     Pm2 = []
     Pm2.append(0)
@@ -168,6 +169,13 @@ def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  
             Pm1.append(Pm2[m])
         elif Pm2[m] < 0 and Pm3[m] < 255:
             Pm1.append(Pm3[m])
+        else:
+            print("else")
+            # print(P[m])
+            # print(Pm2[m])
+            # print(Pm3[m])
+            Pm1.append(122)
+
 
     # copy and change the block
     matrix[startRow][startCol] = Pm1[1]
@@ -180,9 +188,10 @@ def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  
     matrix[startRow + 2][startCol + 1] = Pm1[7]
     matrix[startRow + 2][startCol + 2] = Pm1[8]
 
+    return position
 
 # Extraction Process
-def startBlockExtraction(matrix, startRow, startCol):
+def startBlockExtraction(matrix, startRow, startCol,lengthOfSecret):
     # step1
     P1ir = matrix[startRow + 1][startCol + 1]
     s1ir = bin2dec(kLsb(dec2bin(P1ir)))
@@ -207,14 +216,8 @@ def startBlockExtraction(matrix, startRow, startCol):
     P1m.append(matrix[startRow + 2][startCol + 2])
     D1m = []
     D1m.append(0)
-    print("P'ir")
-    print(P1ir)
-    print("P'm")
-    print(P1m)
     for m in range(1, size):
         D1m.append(abs(P1ir - P1m[m]))
-    print("D'm:")
-    print(D1m)
 
     # step34
     L = []
@@ -226,17 +229,13 @@ def startBlockExtraction(matrix, startRow, startCol):
         L.append(Lj)
         t.append(tj)
 
-    print("Ljm:")
-    print(L)
-    print("this is t")
-    print(t)
+
     # step5
     sm = []
     sm.append(0)
     for m in range(1, size):
         sm.append(D1m[m] - L[m])
-    print("sm:")
-    print(sm)
+
     # step 6
     # to binary
     smbin = []
@@ -245,7 +244,7 @@ def startBlockExtraction(matrix, startRow, startCol):
         smbin.append(dec2bin(sm[m]))
     # print(smbin)
     # to string
-    message = ''
+    message=''
     for m in range(1, size):
         smbin[m] = str(smbin[m])
         diffrence = t[m] - len(smbin[m])
@@ -254,7 +253,6 @@ def startBlockExtraction(matrix, startRow, startCol):
             for i in range(diffrence):
                 temp += '0'
             smbin[m] = temp + smbin[m]
-    # print(smbin)
     for m in range(1, size):
         message += smbin[m]
     # print(message)
@@ -356,9 +354,13 @@ def embeddFirstBlock(matrix, lengthMsgInBits):
             Pm1.append(Pm2[m])
         elif Pm2[m] < 0 and Pm3[m] < 255:
             Pm1.append(Pm3[m])
+        else:
+            Pm1.append(122) #i added it , need to be fixed
+
 
     # copy and change the block
     matrix[startRow][startCol] = Pm1[1]
+    print(Pm1)
     matrix[startRow][startCol + 1] = Pm1[2]
     matrix[startRow][startCol + 2] = Pm1[3]
     matrix[startRow + 1][startCol] = Pm1[4]
@@ -458,16 +460,21 @@ def getMsg():  # get a message and find it binary length, no more than 12, if le
         size = 12 - len(lenBinStr)
         lenBinStr = addZeros(size) + lenBinStr
 
-    return lenBinStr
+    return msgBin,lenBinStr
 
-
+##########################################################################################################
 # encode
 
 matrix = converImgToMatrix('eggs.png')
+matrix=paddingOneByOne(matrix)
 length = len(matrix)
 # printMatrix(matrix)
+array = np.array(matrix, dtype='uint8')
+new_image = Image.fromarray(array, 'L')
+new_image.save('egbefore.png')
 
-lenMsgBin = getMsg()
+
+msgBin,lenMsgBin = getMsg()
 # printMatrix(matrix)
 embeddFirstBlock(matrix, lenMsgBin)
 # printMatrix(matrix)
@@ -475,10 +482,34 @@ embeddFirstBlock(matrix, lenMsgBin)
 print(lenMsgBin)
 
 index = 0
-for i in range(0, length - 1, 3):
-    for j in range(3, length - 1, 3):  # skip the first block
-        index = startBlockEmbedding(matrix, i, j, index, secretInBinary)
+for i in range(0, length - 1-3, 3):
+    for j in range(3, length - 1-3, 3):  # skip the first block
+        index = startBlockEmbedding(matrix, i, j, index, msgBin)
 
+# X = matrix
+# plt.imshow(X, cmap="gray")
+# plt.savefig('after.png')
+array = np.array(matrix, dtype='uint8')
+new_image = Image.fromarray(array, 'L')
+new_image.save('egafter.png')
+
+##########################################################################################################
 # decode
-length = extraxtFirstBlock(matrix)
-lengthOfSecret = bin2dec(length)
+matrix = converImgToMatrix('egafter.png')
+lengthMatrix = len(matrix)
+
+
+lengthMsg = extraxtFirstBlock(matrix)
+lengthOfSecret = bin2dec(lengthMsg)
+print(lengthOfSecret)
+position=0
+message=''
+for i in range(0, length - 1-3, 3):
+    for j in range(3, length - 1-3, 3):  # skip the first block
+        message += startBlockExtraction(matrix, i, j,lengthOfSecret)
+
+
+print("message")
+print(message)
+x=message[0:lengthOfSecret]
+print(bits2a(x))
