@@ -19,20 +19,22 @@ def decrypt(data):#decrypt string by DES
     return vDes.decrypt(data)
 
 
+# x=encrypt("mussi")
+# print(x)
+# y=decrypt(x)
+# print(y)
 
-print('Enter the message')
-mystring = input()
-print("The original string is : " + mystring)
-mystringEncrypt=encrypt(mystring)
-print("The original string is +encrypt : " + str(mystringEncrypt))
-mystringEncryptBinary=a2bits(mystringEncrypt)
-print("The string +encrypt after binary conversion : " +mystringEncryptBinary )
-stringnoraml=bits2a(mystringEncryptBinary)
-print("The string back to normal : " +stringnoraml )
-print("The string back to normal+decrypt : " + str(decrypt(stringnoraml)))
+# print('Enter the message')
+# mystring = input()
+# print("The original string is : " + mystring)
+# mystringEncrypt=encrypt(mystring)
+# print("The original string is +encrypt : " + str(mystringEncrypt))
+# mystringEncryptBinary=a2bits(mystringEncrypt)
+# print("The string +encrypt after binary conversion : " +mystringEncryptBinary )
+# stringnoraml=bits2a(mystringEncryptBinary)
+# print("The string back to normal : " +stringnoraml )
+# print("The string back to normal+decrypt : " + str(decrypt(stringnoraml)))
 
 
 
 
-print ("Encrypted: %r" % d)
-print ("Decrypted: %r" % k.decrypt(d))
