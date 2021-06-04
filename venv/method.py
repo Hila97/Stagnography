@@ -169,12 +169,10 @@ def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  
             Pm1.append(Pm2[m])
         elif Pm2[m] < 0 and Pm3[m] < 255:
             Pm1.append(Pm3[m])
-        else:
+        else: #need to fix it
             print("else")
-            # print(P[m])
-            # print(Pm2[m])
-            # print(Pm3[m])
-            Pm1.append(122)
+            # Pm1.append(122)
+            Pm1.append(Pm3[m])
 
 
     # copy and change the block
@@ -355,7 +353,8 @@ def embeddFirstBlock(matrix, lengthMsgInBits):
         elif Pm2[m] < 0 and Pm3[m] < 255:
             Pm1.append(Pm3[m])
         else:
-            Pm1.append(122) #i added it , need to be fixed
+            # Pm1.append(122) #i added it , need to be fixed
+            Pm1.append(Pm3[m])
 
 
     # copy and change the block
@@ -450,8 +449,11 @@ def addZeros(size):
 def getMsg():  # get a message and find it binary length, no more than 12, if less than padding
     msg = "hey there this is our encryption code"
     msgBin = a2bits(msg)
+    print("the message in binary: ")
     print(msgBin)
     lenMsg = len(msgBin)
+    print("the length of the message: ")
+    print(lenMsg)
 
     lenBinStr = str(dec2bin(lenMsg))
     if len(lenBinStr) > 12:
@@ -475,15 +477,17 @@ new_image.save('egbefore.png')
 
 
 msgBin,lenMsgBin = getMsg()
+
 # printMatrix(matrix)
 embeddFirstBlock(matrix, lenMsgBin)
 # printMatrix(matrix)
 
-print(lenMsgBin)
 
 index = 0
-for i in range(0, length - 1-3, 3):
-    for j in range(3, length - 1-3, 3):  # skip the first block
+for i in range(0, length -3, 3):
+    for j in range(0, length -3, 3):
+        if i==0 and j==0 :
+            break# skip the first block
         index = startBlockEmbedding(matrix, i, j, index, msgBin)
 
 # X = matrix
@@ -501,11 +505,14 @@ lengthMatrix = len(matrix)
 
 lengthMsg = extraxtFirstBlock(matrix)
 lengthOfSecret = bin2dec(lengthMsg)
+print("length after decode")
 print(lengthOfSecret)
 position=0
 message=''
-for i in range(0, length - 1-3, 3):
-    for j in range(3, length - 1-3, 3):  # skip the first block
+for i in range(0, length -3, 3):
+    for j in range(0, length -3, 3):
+        if i==0 and j==0 :
+            break# skip the first block
         message += startBlockExtraction(matrix, i, j,lengthOfSecret)
 
 
@@ -513,3 +520,8 @@ print("message")
 print(message)
 x=message[0:lengthOfSecret]
 print(bits2a(x))
+
+
+array = np.array(matrix, dtype='uint8')
+new_image = Image.fromarray(array, 'L')
+new_image.save('egafter2.png')
