@@ -32,7 +32,7 @@ def paddingOneByOne(sourceMatrix):
     new_row = nmpy_matrix[length - 1]  # equal to the last row
     A = np.concatenate((nmpy_matrix, new_row))  # add the last row again
     B = A.tolist()
-    print(B)
+    # print(B)
     for i in range(len(B)):
         B[i].append(B[i][length - 1])
 
@@ -170,9 +170,9 @@ def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  
         elif Pm2[m] < 0 and Pm3[m] < 255:
             Pm1.append(Pm3[m])
         else: #need to fix it
-            print("else")
+            # print("else")
             # Pm1.append(122)
-            Pm1.append(Pm3[m])
+            Pm1.append(Pm2[m])
 
 
     # copy and change the block
@@ -467,9 +467,17 @@ def getMsg():  # get a message and find it binary length, no more than 12, if le
 ##########################################################################################################
 # encode
 
-matrix = converImgToMatrix('eggs.png')
-matrix=paddingOneByOne(matrix)
+matrix = converImgToMatrix('lena.png')
 length = len(matrix)
+print("length of img")
+print(length)
+if length%3!=0:
+    print("padding +1 ")
+    matrix=paddingOneByOne(matrix)
+if length%3!=0:
+    print("padding +2 ")
+    matrix=paddingOneByOne(matrix)
+
 # printMatrix(matrix)
 array = np.array(matrix, dtype='uint8')
 new_image = Image.fromarray(array, 'L')

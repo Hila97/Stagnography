@@ -4,7 +4,6 @@
     <list default="true" id="890c2ca0-bdf1-448e-8b84-b9f4c0587c94" name="Default Changelist" comment="Problem with the else.">
       <change afterPath="$PROJECT_DIR$/venv/count.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/nna.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/embeddingAndExtracting .py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/embeddingAndExtracting .py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/foo.png" beforeDir="false" afterPath="$PROJECT_DIR$/venv/foo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/method.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/method.py" afterDir="false" />
@@ -243,7 +242,13 @@
       <option name="presentableId" value="LOCAL‎00011" />
       <updated>1622728988227</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL‎00012" summary="few more fixes, still the message does not extracted">
+      <created>1622797547991</created>
+      <option name="number" value="LOCAL‎00012" />
+      <option name="presentableId" value="LOCAL‎00012" />
+      <updated>1622797547991</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -267,6 +272,7 @@
     <MESSAGE value="trying to use DES" />
     <MESSAGE value="encode and decode the length of the message in the first block" />
     <MESSAGE value="Problem with the else." />
-    <option name="LAST_COMMIT_MESSAGE" value="Problem with the else." />
+    <MESSAGE value="few more fixes, still the message does not extracted" />
+    <option name="LAST_COMMIT_MESSAGE" value="few more fixes, still the message does not extracted" />
   </component>
 </project>
