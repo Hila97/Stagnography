@@ -143,6 +143,7 @@ def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  
         x=t[index]
         if position + t[index] > length:
             x = length - position
+
         sm = bin2dec(kMsb(position, x, secretInBinary))
         position += x
         D1.append(L[index] + sm)
@@ -172,7 +173,7 @@ def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  
         else: #need to fix it
             # print("else")
             # Pm1.append(122)
-            Pm1.append(Pm2[m])
+            Pm1.append(255)
 
 
     # copy and change the block
@@ -354,7 +355,7 @@ def embeddFirstBlock(matrix, lengthMsgInBits):
             Pm1.append(Pm3[m])
         else:
             # Pm1.append(122) #i added it , need to be fixed
-            Pm1.append(Pm3[m])
+            Pm1.append(255)
 
 
     # copy and change the block
@@ -447,7 +448,7 @@ def addZeros(size):
 
 
 def getMsg():  # get a message and find it binary length, no more than 12, if less than padding
-    msg = "hey there this is our encryption code"
+    msg = "hey there"
     msgBin = a2bits(msg)
     print("the message in binary: ")
     print(msgBin)
@@ -458,6 +459,7 @@ def getMsg():  # get a message and find it binary length, no more than 12, if le
     lenBinStr = str(dec2bin(lenMsg))
     if len(lenBinStr) > 12:
         print('the massage is to big')
+        exit
     else:
         size = 12 - len(lenBinStr)
         lenBinStr = addZeros(size) + lenBinStr
@@ -467,7 +469,7 @@ def getMsg():  # get a message and find it binary length, no more than 12, if le
 ##########################################################################################################
 # encode
 
-matrix = converImgToMatrix('lena.png')
+matrix = converImgToMatrix('eggs.png')
 length = len(matrix)
 print("length of img")
 print(length)
