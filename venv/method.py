@@ -80,7 +80,8 @@ def rangeTableWithSundivisions(Dm):  # return lower limit, and t
 
 def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  # the embedding process
     length=len(secretInBinary)
-
+    if position==len(secretInBinary):
+        print("it should stop")
     # step1
     pir = matrix[startRow + 1][startCol + 1]  # the middle field= pir
 
@@ -171,7 +172,7 @@ def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  
         elif Pm2[m] < 0 and Pm3[m] < 255:
             Pm1.append(Pm3[m])
         else: #need to fix it
-            # print("else")
+            print("else")
             # Pm1.append(122)
             Pm1.append(255)
 
@@ -355,6 +356,7 @@ def embeddFirstBlock(matrix, lengthMsgInBits):
             Pm1.append(Pm3[m])
         else:
             # Pm1.append(122) #i added it , need to be fixed
+            print("else in first block")
             Pm1.append(255)
 
 
@@ -448,9 +450,11 @@ def addZeros(size):
 
 
 def getMsg():  # get a message and find it binary length, no more than 12, if less than padding
-    msg = "hey there"
+    msg = "hello off"
     msgBin = a2bits(msg)
     print("the message in binary: ")
+    # msgBin=str(1100111010100111010111101001011001110110011101010011101011110100101100111011001110101001110101111010010110011101100111010100111010111101001011001110) #check exemple need to delete
+    print(bits2a(msgBin))
     print(msgBin)
     lenMsg = len(msgBin)
     print("the length of the message: ")
@@ -469,7 +473,8 @@ def getMsg():  # get a message and find it binary length, no more than 12, if le
 ##########################################################################################################
 # encode
 
-matrix = converImgToMatrix('eggs.png')
+matrix = converImgToMatrix('Lena_Image.png')
+# matrix=[[0,0,0,255,255,255,122,122,122],[122,122,122,0,0,0,122,122,122],[200,200,200,122,122,122,122,122,122],[0,0,0,255,255,255,122,122,122],[122,122,122,0,0,0,122,122,122],[200,200,200,122,122,122,122,122,122],[0,0,0,255,255,255,122,122,122],[122,122,122,0,0,0,122,122,122],[200,200,200,122,122,122,122,122,122]]
 length = len(matrix)
 print("length of img")
 print(length)
@@ -494,11 +499,14 @@ embeddFirstBlock(matrix, lenMsgBin)
 
 
 index = 0
-for i in range(0, length -3, 3):
-    for j in range(0, length -3, 3):
+print("le")
+print(length)
+for i in range(0, length -2, 3):
+    for j in range(0, length -2, 3):
         if i==0 and j==0 :
-            break# skip the first block
-        index = startBlockEmbedding(matrix, i, j, index, msgBin)
+            print("first blocj")# skip the first block
+        else:
+            index = startBlockEmbedding(matrix, i, j, index, msgBin)
 
 # X = matrix
 # plt.imshow(X, cmap="gray")
@@ -519,16 +527,23 @@ print("length after decode")
 print(lengthOfSecret)
 position=0
 message=''
-for i in range(0, length -3, 3):
-    for j in range(0, length -3, 3):
+for i in range(0, length -2, 3):
+    for j in range(0, length -2, 3):
+
         if i==0 and j==0 :
-            break# skip the first block
-        message += startBlockExtraction(matrix, i, j,lengthOfSecret)
+            print("first block")# skip the first block
+        else:
+            message += startBlockExtraction(matrix, i, j,lengthOfSecret)
+
 
 
 print("message")
 print(message)
-x=message[0:lengthOfSecret]
+message='0'+message
+print(message)
+# x=message[0:lengthOfSecret]
+x=message[0:72]
+
 print(bits2a(x))
 
 

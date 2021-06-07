@@ -29,6 +29,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="ToolWindowRun.ShowToolbar" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/venv" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -254,7 +255,13 @@
       <option name="presentableId" value="LOCAL‎00013" />
       <updated>1622798548707</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL‎00014" summary="..">
+      <created>1623056321096</created>
+      <option name="number" value="LOCAL‎00014" />
+      <option name="presentableId" value="LOCAL‎00014" />
+      <updated>1623056321096</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -280,17 +287,7 @@
     <MESSAGE value="Problem with the else." />
     <MESSAGE value="few more fixes, still the message does not extracted" />
     <MESSAGE value="-" />
-    <option name="LAST_COMMIT_MESSAGE" value="-" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/venv/method.py</url>
-          <line>436</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value=".." />
+    <option name="LAST_COMMIT_MESSAGE" value=".." />
   </component>
 </project>
