@@ -11,11 +11,8 @@ def PSNR(before, after):
     psnr = 20 * log10(max_pixel / sqrt(mse))
     return psnr
 
-def main():
-    before = cv2.imread("lenaBefore.png")
-    after = cv2.imread("lenaafter.png", 1)
-    value = PSNR(before, after)
-    print(f"PSNR value is {value} dB")
+before = cv2.imread("lenaBefore.png")
+after = cv2.imread("lenaafter.png", 1)
+value = PSNR(before, after)
+print(f"PSNR value is {value} dB")
 
-if __name__ == "__main__":
-    main()
