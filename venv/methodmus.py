@@ -172,6 +172,7 @@ def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  
             Pm1.append(Pm3[m])
         else:  # need to fix it
             print("else")
+            print(D1[m]-L[m])
             # Pm1.append(122)
             Pm1.append(P[m])
 
@@ -285,7 +286,8 @@ def startBlockExtraction(matrix, startRow, startCol, lengthOfSecret, lenTillNow)
         for i in range(diffrence):
             temp += '0'
     begining=temp+str(KmsbFromBegin)
-
+    print("k")
+    print(begining)
     message = str(begining) + message
 
     return message
@@ -477,7 +479,7 @@ def addZeros(size):
 
 
 def getMsg():  # get a message and find it binary length, no more than 12, if less than padding
-    msg = "hello world"
+    msg = "why it is not working off"
     msgBin = a2bits(msg)
     print("the message in binary: ")
     # msgBin=str(1100111010100111010111101001011001110110011101010011101011110100101100111011001110101001110101111010010110011101100111010100111010111101001011001110) #check exemple need to delete
