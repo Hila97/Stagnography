@@ -3,11 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="890c2ca0-bdf1-448e-8b84-b9f4c0587c94" name="Default Changelist" comment="Problem with the else.">
       <change afterPath="$PROJECT_DIR$/venv/count.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/methodmus.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/nna.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/embeddingAndExtracting .py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/embeddingAndExtracting .py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/foo.png" beforeDir="false" afterPath="$PROJECT_DIR$/venv/foo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/method.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/method.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/methodmus.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/methodmus.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,7 +24,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="ProjectId" id="1t3wjeTOf3ivpH9ZCZHXx07PgSs" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -115,7 +115,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="methodmus" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="methodmus" type="PythonConfigurationType" factoryName="Python">
       <module name="Stagnography" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -159,7 +159,6 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.methodmus" />
         <item itemvalue="Python.method" />
         <item itemvalue="Python.binaryString" />
         <item itemvalue="Python.myTry" />
@@ -268,7 +267,13 @@
       <option name="presentableId" value="LOCAL‎00015" />
       <updated>1623061871367</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL‎00016" summary="fix the decoding">
+      <created>1623243957141</created>
+      <option name="number" value="LOCAL‎00016" />
+      <option name="presentableId" value="LOCAL‎00016" />
+      <updated>1623243957141</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -296,6 +301,18 @@
     <MESSAGE value="-" />
     <MESSAGE value=".." />
     <MESSAGE value="fix the loops.." />
-    <option name="LAST_COMMIT_MESSAGE" value="fix the loops.." />
+    <MESSAGE value="fix the decoding" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix the decoding" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/venv/methodmus.py</url>
+          <line>142</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
