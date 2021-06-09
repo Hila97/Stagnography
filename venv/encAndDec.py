@@ -7,6 +7,7 @@ class Encryption():
 
         # Sets a random seed and a self.seed attribute
         random.seed(seed)
+
         self.seed = seed
 
         # Creates an empty string attribute to hold the encrypted phrase
@@ -86,3 +87,5 @@ secret_message_dec=bits2string(secret_message_bin)
 print("secret_message_edc:\n"+secret_message_dec)
 open_message = x.decrypt(str(secret_message), 9)
 print("deciphering:\n",open_message)
+
+
