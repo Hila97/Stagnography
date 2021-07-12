@@ -80,7 +80,7 @@ def rangeTableWithSundivisions(Dm):  # return lower limit, and t
 
 def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  # the embedding process
     length=len(secretInBinary)
-    if position==len(secretInBinary):
+    if position>=len(secretInBinary):
         print("it should stop")
     # step1
     pir = matrix[startRow + 1][startCol + 1]  # the middle field= pir
@@ -88,7 +88,7 @@ def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  
     # step2
     lsbir = bin2dec(kLsb(dec2bin(pir)))  # take k rightmost LSBs of Pir
     x=k
-    if position+k>length:
+    if position+k>=length:
         x=length-position
     sir = bin2dec(kMsb(position, x, secretInBinary))  # take k left-most bits of secret message
     position += x  # start to take bits from the secret messages
@@ -142,7 +142,7 @@ def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  
     D1.append(0)
     for index in range(1, size):
         x=t[index]
-        if position + t[index] > length:
+        if position + t[index] >= length:
             x = length - position
 
         sm = bin2dec(kMsb(position, x, secretInBinary))
@@ -174,7 +174,7 @@ def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  
         else: #need to fix it
             print("else")
             # Pm1.append(122)
-            Pm1.append(255)
+            Pm1.append(122)
 
 
     # copy and change the block
@@ -190,8 +190,17 @@ def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  
 
     return position
 
+
+
+
 # Extraction Process
-def startBlockExtraction(matrix, startRow, startCol,lengthOfSecret):
+
+def tillnow(arr,lenTillNow):
+    sum=lenTillNow+k
+    for x in arr:
+        sum+=len(str(x))
+    return sum
+def startBlockExtraction(matrix, startRow, startCol,lengthOfSecret,lenTillNow):
     # step1
     P1ir = matrix[startRow + 1][startCol + 1]
     s1ir = bin2dec(kLsb(dec2bin(P1ir)))
@@ -244,17 +253,25 @@ def startBlockExtraction(matrix, startRow, startCol,lengthOfSecret):
         smbin.append(dec2bin(sm[m]))
     # print(smbin)
     # to string
-    message=''
+    smbinWitht=[]
+    smbinWitht.append(0)
+
+    message = ''
     for m in range(1, size):
-        smbin[m] = str(smbin[m])
-        diffrence = t[m] - len(smbin[m])
-        if diffrence != 0:
-            temp = ''
+        smbinString = str(smbin[m])
+        y=t[m]
+        if y+tillnow(smbinWitht,lenTillNow)>=lengthOfSecret:
+            y= lengthOfSecret-tillnow(smbinWitht,lenTillNow)
+
+        diffrence = y - len(smbinString)
+        temp = ''
+
+        if diffrence > 0:
             for i in range(diffrence):
                 temp += '0'
-            smbin[m] = temp + smbin[m]
+        smbinWitht.append(temp + smbinString)
     for m in range(1, size):
-        message += smbin[m]
+        message += smbinWitht[m]
     # print(message)
     # compute the Kmsb of the message by the Klsb of p'ir
     Kmsb = kLsb(dec2bin(P1ir))
@@ -315,7 +332,7 @@ def embeddFirstBlock(matrix, lengthMsgInBits):
     # p8
     P.append(matrix[startRow + 2][startCol + 2])
     # comupte D
-    for index in range(1, size):  # run thoreu 8
+    for index in range(1, 5):  # run thoreu 8
         D.append(abs(p1ir - P[index]))
     # step6
     L = []
@@ -357,7 +374,7 @@ def embeddFirstBlock(matrix, lengthMsgInBits):
         else:
             # Pm1.append(122) #i added it , need to be fixed
             print("else in first block")
-            Pm1.append(255)
+            Pm1.append(122)
 
 
     # copy and change the block
@@ -450,7 +467,7 @@ def addZeros(size):
 
 
 def getMsg():  # get a message and find it binary length, no more than 12, if less than padding
-    msg = "hello off"
+    msg = "he"
     msgBin = a2bits(msg)
     print("the message in binary: ")
     # msgBin=str(1100111010100111010111101001011001110110011101010011101011110100101100111011001110101001110101111010010110011101100111010100111010111101001011001110) #check exemple need to delete
@@ -473,7 +490,7 @@ def getMsg():  # get a message and find it binary length, no more than 12, if le
 ##########################################################################################################
 # encode
 
-matrix = converImgToMatrix('Lena_Image.png')
+matrix = converImgToMatrix('lena.png')
 # matrix=[[0,0,0,255,255,255,122,122,122],[122,122,122,0,0,0,122,122,122],[200,200,200,122,122,122,122,122,122],[0,0,0,255,255,255,122,122,122],[122,122,122,0,0,0,122,122,122],[200,200,200,122,122,122,122,122,122],[0,0,0,255,255,255,122,122,122],[122,122,122,0,0,0,122,122,122],[200,200,200,122,122,122,122,122,122]]
 length = len(matrix)
 print("length of img")
@@ -499,13 +516,11 @@ embeddFirstBlock(matrix, lenMsgBin)
 
 
 index = 0
-print("le")
-print(length)
-for i in range(0, length -2, 3):
-    for j in range(0, length -2, 3):
+for i in range(0, length -1, 3):
+    for j in range(0, length -1, 3):
         if i==0 and j==0 :
-            print("first blocj")# skip the first block
-        else:
+            print("first block")# skip the first block
+        elif index<len(msgBin): #only if there is more to embedd
             index = startBlockEmbedding(matrix, i, j, index, msgBin)
 
 # X = matrix
@@ -527,13 +542,12 @@ print("length after decode")
 print(lengthOfSecret)
 position=0
 message=''
-for i in range(0, length -2, 3):
-    for j in range(0, length -2, 3):
-
+for i in range(0, length -1, 3):
+    for j in range(0, length -1, 3):
         if i==0 and j==0 :
             print("first block")# skip the first block
         else:
-            message += startBlockExtraction(matrix, i, j,lengthOfSecret)
+            message += startBlockExtraction(matrix, i, j,lengthOfSecret,len(message))
 
 
 
@@ -541,8 +555,8 @@ print("message")
 print(message)
 message='0'+message
 print(message)
-# x=message[0:lengthOfSecret]
-x=message[0:72]
+x=message[0:lengthOfSecret]
+# x=message[0:72]
 
 print(bits2a(x))
 

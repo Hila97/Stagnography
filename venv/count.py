@@ -1,10 +1,13 @@
 from PIL import Image
 import numpy as np
-from binaryString import *
 
+
+import matplotlib.pyplot as plt
+import numpy as np
 size = 9
 
 k = 3
+
 
 def converImgToMatrix(route):
     img = Image.open(route).convert('L')  # convert image to 8-bit grayscale
@@ -25,19 +28,12 @@ def printMatrix(data):
 
 def paddingOneByOne(sourceMatrix):
     ##add one line , to be divided by 3
-    length=len(sourceMatrix)
     nmpy_matrix = np.matrix(sourceMatrix)  # from matrix to numpy
     new_row = nmpy_matrix[length - 1]  # equal to the last row
     A = np.concatenate((nmpy_matrix, new_row))  # add the last row again
-    B=A.tolist()
-    print(B)
-    for i in range(len(B)):
-        B[i].append(B[i][length-1])
-
-    # B = np.insert(A, length, values=A[:, length - 1], axis=1)  # add the last col again
-    # is numpy object
-    return   B
-
+    B = np.insert(A, length, values=A[:, length - 1], axis=1)  # add the last col again
+    B  # is numpy object
+    return B.tolist()  # python list
 
 
 def dec2bin(x):  # from decimal number
@@ -45,10 +41,7 @@ def dec2bin(x):  # from decimal number
 
 
 def bin2dec(x):  # from binary number (not string)
-
     binary = str(x)
-    print(binary)
-    print(type(binary))
     return int(binary, 2)
 
 
@@ -60,7 +53,7 @@ def kLsb(binaryNumber):  # get binary number and return its k lsb in binary
 def kMsb(startIndex, size, binaryNumber):  # get binary number and return its k msb in binary
     length = len(str(binaryNumber))
     toDivide = startIndex + size
-    x = abs(length - toDivide)
+    x = length - toDivide
     division = pow(10, x)
     ans = binaryNumber // division
     modulo = pow(10, size)
@@ -80,26 +73,16 @@ def rangeTableWithSundivisions(Dm):  # return lower limit, and t
         return 64, 6
 
 
-
-def startBlockEmbedding(matrix, startRow, startCol,secretInBinary,position):  # the embedding process
-
+def startBlockEmbedding(matrix, startRow, startCol,secretInBinary):  # the embedding process
+    position = 0
     # step1
     pir = matrix[startRow + 1][startCol + 1]  # the middle field= pir
-    print("the pir is")
-    print(pir)
     # step2
     lsbir = bin2dec(kLsb(dec2bin(pir)))  # take k rightmost LSBs of Pir
 
-    print(len(str(secretInBinary)))
     sir = bin2dec(kMsb(position, k, secretInBinary))  # take k left-most bits of secret message
-<<<<<<<< Updated upstream:venv/embeddingAndExtracting .py
     position = k  # start to take bits from the secret messages
-    print("this is the sir")
-    print(sir)
-========
-    position += k  # start to take bits from the secret messages
     # print(sir)
->>>>>>>> Stashed changes:venv/lama.py
     # step3
     p1ir = pir - lsbir + sir  # p'ir
     # step4
@@ -144,48 +127,15 @@ def startBlockEmbedding(matrix, startRow, startCol,secretInBinary,position):  # 
         L.append(Lj)
         t.append(tj)
     # step7
-<<<<<<<< Updated upstream:venv/embeddingAndExtracting .py
-    print("Ljm:")
-    print(L)
-    print("tjm:")
-    print(t)
-    D1 = []
-    D1.append(0)
-    for index in range(1, size):
-        # print("1")
-        # print(position)
-        # print("2")
-        # print(t[index])
-        # print("1")
-        # print(secretInBinary)
-        sm = bin2dec(kMsb(position, t[index], secretInBinary))
-        position += t[index]
-        D1.append(L[index] + sm)
-
-    print("D':")
-    print(D1)
-========
     # print(L)
     # print(t)
     D1 = []
     D1.append(0)
     for index in range(1, size):
-        print(position)
-        print(secretInBinary)
-        print(t[index])
-        if position+t[index]<=len(str(secretInBinary)): #there is more to encrypt the message
-            sm = bin2dec(kMsb(position, t[index], secretInBinary))
-            position += t[index]
-
-        else:
-            print("else")
-            diffOfMess=len(str(secretInBinary)) - position
-            sm = bin2dec(kMsb(position, diffOfMess, secretInBinary))
-            position+=diffOfMess
-
+        sm = bin2dec(kMsb(position, t[index], secretInBinary))
+        position += t[index]
         D1.append(L[index] + sm)
     # print(D1)
->>>>>>>> Stashed changes:venv/lama.py
     # step8
     Pm2 = []
     Pm2.append(0)
@@ -194,15 +144,8 @@ def startBlockEmbedding(matrix, startRow, startCol,secretInBinary,position):  # 
     for index in range(1, size):
         Pm2.append(p1ir - D1[index])
         Pm3.append(p1ir + D1[index])
-<<<<<<<< Updated upstream:venv/embeddingAndExtracting .py
-    print("P''m:")
-    print(Pm2)
-    print("P'''m")
-    print(Pm3)
-========
     # print(Pm2)
     # print(Pm3)
->>>>>>>> Stashed changes:venv/lama.py
     # step9
     Pm1 = []
     Pm1.append(0)
@@ -215,15 +158,10 @@ def startBlockEmbedding(matrix, startRow, startCol,secretInBinary,position):  # 
             Pm1.append(Pm2[m])
         elif Pm2[m] < 0 and Pm3[m] < 255:
             Pm1.append(Pm3[m])
-<<<<<<<< Updated upstream:venv/embeddingAndExtracting .py
-    print("P'm:")
-    print(Pm1)
-========
         else:
-            Pm1.append(0)#לא חלק מהאלגוריתם אני הוספתי כי באיזה שהוא שלב הוא לא לא מוסיף איבר
+            Pm1.append(0) #i added it
 
     # print(Pm1)
->>>>>>>> Stashed changes:venv/lama.py
     # copy and change the block
     matrix[startRow][startCol] = Pm1[1]
     matrix[startRow][startCol+1] = Pm1[2]
@@ -233,12 +171,7 @@ def startBlockEmbedding(matrix, startRow, startCol,secretInBinary,position):  # 
     matrix[startRow+1][startCol+2] = Pm1[5]
     matrix[startRow+2][startCol] = Pm1[6]
     matrix[startRow+2][startCol+1] = Pm1[7]
-    print(Pm1)
-    print(Pm1[8])
     matrix[startRow+2][startCol+2] = Pm1[8]
-
-    return position
-
 
 
 # Extraction Process
@@ -267,14 +200,11 @@ def startBlockExtraction(matrix, startRow, startCol):
     P1m.append(matrix[startRow + 2][startCol + 2])
     D1m = []
     D1m.append(0)
-    print("P'ir")
-    print(P1ir)
-    print("P'm")
-    print(P1m)
+    # print(P1ir)
+    # print(P1m)
     for m in range(1, size):
         D1m.append(abs(P1ir - P1m[m]))
-    print("D'm:")
-    print(D1m)
+    # print(D1m)
 
     # step34
     L = []
@@ -285,25 +215,21 @@ def startBlockExtraction(matrix, startRow, startCol):
         Lj, tj = rangeTableWithSundivisions(D1m[index])
         L.append(Lj)
         t.append(tj)
-
-    print("Ljm:")
-    print(L)
-    print("this is t")
-    print(t)
+    # print(L)
+    # print(t)
     # step5
     sm = []
     sm.append(0)
     for m in range(1, size):
         sm.append(D1m[m] - L[m])
-    print("sm:")
-    print(sm)
+    # print(sm)
     # step 6
     # to binary
     smbin = []
     smbin.append(0)
     for m in range(1, size):
         smbin.append(dec2bin(sm[m]))
-    #print(smbin)
+    # print(smbin)
     # to string
     message = ''
     for m in range(1, size):
@@ -314,15 +240,15 @@ def startBlockExtraction(matrix, startRow, startCol):
             for i in range(diffrence):
                 temp += '0'
             smbin[m] = temp + smbin[m]
-    #print(smbin)
+    # print(smbin)
     for m in range(1, size):
         message += smbin[m]
-    #print(message)
+    # print(message)
     # compute the Kmsb of the message by the Klsb of p'ir
     Kmsb = kLsb(dec2bin(P1ir))
     message = str(Kmsb)+message
-    print("the message is:")
-    print (message)
+    # print("msg")
+    # print(message)
     return message
 
 
@@ -332,56 +258,6 @@ def startBlockExtraction(matrix, startRow, startCol):
 
 
 
-mess="this is the message i want to encrypt try mussi"
-messBin= a2bits(mess)
-messLen=len(messBin)
-messBin=int(messBin)
-print(mess)
-print(messBin)
-print('len message' , messLen)
-
-source= converImgToMatrix('eggs.png')
-matrix=source
-length=len(matrix)
-print(length)
-
-<<<<<<<< Updated upstream:venv/embeddingAndExtracting .py
-secretInBinary = 1100111010100111010111101001011001110
-print(len(str(secretInBinary)))
-#secretInBinary = 1100111010100111010111101001011001110
-print(secretInBinary)
-
-imagei = [[80, 90, 120], [60, 100, 150], [95, 130, 170]]
-print("the first block is")
-print(imagei)
-stego = imagei
-startBlockEmbedding(stego, 0, 0)
-print('&&&&&&&&&&&&&&&&')
-startBlockExtraction(stego, 0, 0)
-========
-
-index=0
-for i in range(0,length-1,3):
-    for j in range(0,length-1,3):
-        print('start block')
-        if index!=len(str(messBin)):
-            index=startBlockEmbedding(matrix,i,j,messBin,index)
-        # print()
-print("---------------------------------")
-print("---------------------------------")
-print("---------------------------------")
->>>>>>>> Stashed changes:venv/lama.py
-
-msg=''
-for i in range(0,length-1,3):
-    for j in range(0,length-1,3):
-        print('start block')
-        if len(msg)<len(str(messBin)):
-            msg+=startBlockExtraction(matrix,i,j)
-        # print()
-print("finsh")
-print(msg)
-print(bits2a(msg))
 
 #
 # secretInBinary = 1100111010100111010111101001011001110
@@ -390,57 +266,69 @@ print(bits2a(msg))
 # stego = imagei
 # startBlockEmbedding(stego, 0, 0)
 # print('&&&&&&&&&&&&&&&&')
-# cc=startBlockExtraction(stego, 0, 0)
-# print(cc)
-# print(secretInBinary)
+# startBlockExtraction(stego, 0, 0)
+
 # for i in range(startRow,startRow+3,1):
 # #     for j in range(startCol,startCol+3,1):
 #         print(matrix[i][j],end=" ")
 #        print()
 
-<<<<<<<< Updated upstream:venv/embeddingAndExtracting .py
-matrix = converImgToMatrix('eggs.png')
-printMatrix(matrix)
-print("after adding of 1 row")
-printMatrix(paddingOneByOne(matrix))
+
+before = converImgToMatrix('eggs.png')
+matrix=before
 length = len(matrix)
-#printMatrix(matrix)
-========
 
-# matrix = converImgToMatrix('eggs.png')
-# length = len(matrix)
+X = before
+plt.imshow(X, cmap="gray")
+plt.savefig('before.png')
 
->>>>>>>> Stashed changes:venv/lama.py
+
 # for i in range(length):
 #     for j in range(length ):
 #         print(matrix[i][j], end =" ")
 #     print()
 
 
-# skip 3 - run all the blocks
-# for i in range(0,length-1,3):
-#     for j in range(0,length-1,3):
-#         startBlockEmbedding(matrix,i,j)
-#         # print()
+def createBlock(x,y,matImg):
+    lis=[]
+    for i in range(x,3):
+        for j in range(y,3):
+            lis.append(matImg[i][j])
+    msg=''
+    for x in lis:
+        msg+=str(dec2bin(x))
+    return int(msg)
 
+# skip 3 - run all the blocks
+for i in range(0,length-1,3):
+    for j in range(0,length-1,3):
+        listOfMSG=createBlock(i,j,matrix)
+        startBlockEmbedding(matrix,i,j,listOfMSG)
+        # print()
 
 ##########################################decoding##############################
-<<<<<<<< Updated upstream:venv/embeddingAndExtracting .py
+afterMat = [[0 for x in range(length)] for y in range(length)]
 
-import matplotlib.pyplot as plt
-import numpy as np
+def createBlockAftre(i,j,afterMat,msg):
+    lis = list(msg)
+    count=0
+    for x in range(i,i+3):
+        for y in range(j,j+3):
+            afterMat[x][y]=bin2dec(lis[count])
+            count+=1
 
-X = matrix
+for i in range(0,length-1,3):
+    for j in range(0,length-1,3):
+        msg= startBlockExtraction(matrix,i,j)
+        print(msg)
+        createBlockAftre(i,j,afterMat,msg)
+        # print()
+
+print()
+print('---------------------------')
+printMatrix(afterMat)
+
+X = afterMat
 plt.imshow(X, cmap="gray")
 # plt.show()
-plt.savefig('foo.png')
-========
-#
-# import matplotlib.pyplot as plt
-# import numpy as np
-#
-# X = matrix
-# plt.imshow(X, cmap="gray")
-# # plt.show()
-# plt.savefig('foo.png')
->>>>>>>> Stashed changes:venv/lama.py
+plt.savefig('after.png')

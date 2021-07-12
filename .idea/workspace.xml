@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="890c2ca0-bdf1-448e-8b84-b9f4c0587c94" name="Default Changelist" comment="Problem with the else.">
       <change afterPath="$PROJECT_DIR$/venv/count.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/drive.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/venv/nna.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/baboon.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/embeddingAndExtracting .py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/embeddingAndExtracting .py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/foo.png" beforeDir="false" afterPath="$PROJECT_DIR$/venv/foo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/method.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/method.py" afterDir="false" />
@@ -51,7 +54,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.methodmus">
+  <component name="RunManager" selected="Python.drive">
     <configuration name="binaryString" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Stagnography" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -65,6 +68,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/venv/binaryString.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="drive" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Stagnography" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/venv/drive.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -159,6 +183,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.drive" />
         <item itemvalue="Python.method" />
         <item itemvalue="Python.binaryString" />
         <item itemvalue="Python.myTry" />
@@ -281,7 +306,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -303,16 +330,5 @@
     <MESSAGE value="fix the loops.." />
     <MESSAGE value="fix the decoding" />
     <option name="LAST_COMMIT_MESSAGE" value="fix the decoding" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/venv/methodmus.py</url>
-          <line>142</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
