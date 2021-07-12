@@ -72,20 +72,11 @@ class Encryption():
         decrypted_message = "".join(decrypted_message)[::-1][::2]
         return decrypted_message
 
-def bits2string(b):
-    return ''.join(chr(int(''.join(x), 2)) for x in zip(*[iter(b)] * 8))
-def string2bits(s):
-    return ''.join(format(ord(i), '08b') for i in s)
 
 x = Encryption(9)
-print("input message:")
-secret_message = x.encrypt(input())
-print("secret_message:\n" ,secret_message)
-secret_message_bin=string2bits(secret_message)
-print("secret_message_bin:\n"+secret_message_bin)
-secret_message_dec=bits2string(secret_message_bin)
-print("secret_message_edc:\n"+secret_message_dec)
-open_message = x.decrypt(str(secret_message), 9)
-print("deciphering:\n",open_message)
 
+def encryptMsg(msg):
+    return x.encrypt(msg)
 
+def decryptMsg(secret_message):
+    return x.decrypt(str(secret_message), 9)

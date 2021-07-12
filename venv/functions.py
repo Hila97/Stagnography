@@ -5,18 +5,14 @@ import matplotlib.pyplot as plt
 import math
 
 size = 9
-
 k = 3
 
 
 def stringToImage(str, size):
     x = []
     for i in range(0, size, 8):
-        # print("i", i)
         s = str[i:i + 8]
-        # print(s)
         s = bin2dec(s)
-        # print(s)
         x.append(s)
     return x
 
@@ -52,7 +48,6 @@ def paddingOneByOne(sourceMatrix):
     new_row = nmpy_matrix[length - 1]  # equal to the last row
     A = np.concatenate((nmpy_matrix, new_row))  # add the last row again
     B = A.tolist()
-    # print(B)
     for i in range(len(B)):
         B[i].append(B[i][length - 1])
 
@@ -186,16 +181,11 @@ def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  
             Pm1.append(Pm2[m])
         elif abs(P[m] - Pm3[m]) < abs(P[m] - Pm2[m]) and 0 <= Pm3[m] <= 255:
             Pm1.append(Pm3[m])
-        elif Pm3[m] > 256 and Pm2[m] >= 0:
+        elif Pm3[m] > 255 and Pm2[m] > 0:
             Pm1.append(Pm2[m])
-        elif Pm2[m] <= 0 and Pm3[m] < 256:
+        elif Pm2[m] < 0 and Pm3[m] < 255:
             Pm1.append(Pm3[m])
         else:  # need to fix it
-            print("else")
-            # print(P[m])
-            # print(Pm2[m])
-            # print(Pm3[m])
-            # print(D1[m]-L[m])
             # # Pm1.append(122)
             Pm1.append(Pm3[m])
 
@@ -209,7 +199,6 @@ def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  
     matrix[startRow + 2][startCol] = Pm1[6]
     matrix[startRow + 2][startCol + 1] = Pm1[7]
     matrix[startRow + 2][startCol + 2] = Pm1[8]
-    # print("another block", matrix)
 
     return position
 
@@ -289,12 +278,10 @@ def startBlockExtraction(matrix, startRow, startCol, lengthOfSecret, lenTillNow)
     smbin.append(0)
     for m in range(1, size):
         smbin.append(dec2bin(sm[m]))
-    # print(smbin)
     # to string
     smbinWitht = []
     smbinWitht.append(0)
-    # print("t")
-    # print(t)
+
     message = ''
     for m in range(1, size):
         smbinString = str(smbin[m])
@@ -309,27 +296,11 @@ def startBlockExtraction(matrix, startRow, startCol, lengthOfSecret, lenTillNow)
             for i in range(diffrence):
                 temp += '0'
         smbinWitht.append(temp + smbinString)
-        # print("smbinwitht",smbinWitht)
-    print(smbinWitht)
+    # print(smbinWitht)
     for m in range(1, size):
         message += smbinWitht[m]
-    # print(message)
-    # # compute the Kmsb of the message by the Klsb of p'ir
-    # KmsbFromBegin = kLsb(dec2bin(P1ir))
-    # y=k
-    # if  tillnow(smbinWitht, lenTillNow) >= lengthOfSecret:
-    #     y = lengthOfSecret - tillnow(smbinWitht, lenTillNow)
-    # diffrence=y-len(str(KmsbFromBegin))
-    # temp = ''
-    #
-    # if diffrence > 0:
-    #     for i in range(diffrence):
-    #         temp += '0'
-    # begining=temp+str(KmsbFromBegin)
-    print("k")
-    print(begining)
+
     message = str(begining) + message
-    # print("msg",message)
 
     return message
 
@@ -427,7 +398,7 @@ def embeddFirstBlock(matrix, lengthMsgInBits):
             Pm1.append(Pm3[m])
         else:
             # Pm1.append(122) #i added it , need to be fixed
-            print("else in first block")
+            # print("else in first block")
             Pm1.append(Pm3[m])
 
     # copy and change the block
@@ -437,7 +408,6 @@ def embeddFirstBlock(matrix, lengthMsgInBits):
     matrix[startRow][startCol + 2] = Pm1[3]
     matrix[startRow + 1][startCol] = Pm1[4]
     matrix[startRow + 1][startCol + 1] = p1ir
-    print("first block", matrix)
 
 
 def extraxtFirstBlock(matrix):
@@ -520,11 +490,10 @@ def addZeros(size):
     return msg
 
 
-def getMsg():  # get a message and find it binary length, no more than 12, if less than padding
-    msg =  "how are you im fine thank you and muss how are you im fine thank you and musshow are you im fine thank you and muss"
+def getMsg(msg):  # get a message and find it binary length, no more than 12, if less than padding
+    # msg="hello"
     msgBin = a2bits(msg)
     print("the message in binary: ")
-    # msgBin=str(1100111010100111010111101001011001110110011101010011101011110100101100111011001110101001110101111010010110011101100111010100111010111101001011001110) #check exemple need to delete
     print(bits2a(msgBin))
     print(msgBin)
     lenMsg = len(msgBin)
@@ -533,8 +502,8 @@ def getMsg():  # get a message and find it binary length, no more than 12, if le
 
     lenBinStr = str(dec2bin(lenMsg))
     if len(lenBinStr) > 12:
-        print('the massage is to big')
-        exit
+        print('the massage is too big')
+        exit(1)
     else:
         size = 12 - len(lenBinStr)
         lenBinStr = addZeros(size) + lenBinStr
