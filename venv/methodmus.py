@@ -274,6 +274,7 @@ def startBlockExtraction(matrix, startRow, startCol, lengthOfSecret, lenTillNow)
                 temp += '0'
         smbinWitht.append(temp + smbinString)
         # print("smbinwitht",smbinWitht)
+    # print(smbinWitht)
     for m in range(1, size):
         message += smbinWitht[m]
     # print(message)
@@ -287,6 +288,7 @@ def startBlockExtraction(matrix, startRow, startCol, lengthOfSecret, lenTillNow)
     if diffrence > 0:
         for i in range(diffrence):
             temp += '0'
+
     begining=temp+str(KmsbFromBegin)
     # print("k")
     # print(begining)
@@ -481,10 +483,9 @@ def addZeros(size):
 
 
 def getMsg():  # get a message and find it binary length, no more than 12, if less than padding
-    msg = "hello this is the message i want to try it"
+    msg = "mussi please work, this is our project and we hate it"
     msgBin = a2bits(msg)
     print("the message in binary: ")
-    # msgBin=str(1100111010100111010111101001011001110110011101010011101011110100101100111011001110101001110101111010010110011101100111010100111010111101001011001110) #check exemple need to delete
     print(bits2a(msgBin))
     print(msgBin)
     lenMsg = len(msgBin)

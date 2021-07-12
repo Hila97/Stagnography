@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 ##########################################################################################################
 # encode
 
-matrix = converImgToMatrix('eggs.png')
+matrix = converImgToMatrix('paint2.png')
 # matrix = [[0, 0, 0, 255, 255, 255, 122, 122, 122], [122, 122, 122, 0, 0, 0, 122, 122, 122],
 #           [200, 200, 200, 122, 122, 122, 122, 122, 122], [0, 0, 0, 255, 255, 255, 122, 122, 122],
 #           [122, 122, 122, 0, 0, 0, 122, 122, 122], [200, 200, 200, 122, 122, 122, 122, 122, 122],
@@ -66,7 +66,7 @@ new_image.save('after.png')
 
 ##########################################################################################################
 # decode
-matrix = converImgToMatrix('after.png')
+matrix = converImgToMatrix('paint2.png')
 lengthMatrix = len(matrix)
 
 lengthMsg = extraxtFirstBlock(matrix)
