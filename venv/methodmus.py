@@ -2,9 +2,30 @@ from PIL import Image
 import numpy as np
 from binaryString import *
 import matplotlib.pyplot as plt
+import math
 
 size = 9
+
 k = 3
+
+
+def stringToImage(str, size):
+    x = []
+    for i in range(0, size, 8):
+        # print("i", i)
+        s = str[i:i + 8]
+        # print(s)
+        s = bin2dec(s)
+        # print(s)
+        x.append(s)
+    return x
+
+
+def decMatToBinArr(mat,matrix):
+    for x in matrix:
+        for y in x:
+            mat.append(str(format(y, '08b')))
+
 
 
 def converImgToMatrix(route):
@@ -486,6 +507,7 @@ def getMsg():  # get a message and find it binary length, no more than 12, if le
     msg = "mussi please work, this is our project and we hate it"
     msgBin = a2bits(msg)
     print("the message in binary: ")
+    # msgBin=str(1100111010100111010111101001011001110110011101010011101011110100101100111011001110101001110101111010010110011101100111010100111010111101001011001110) #check exemple need to delete
     print(bits2a(msgBin))
     print(msgBin)
     lenMsg = len(msgBin)
