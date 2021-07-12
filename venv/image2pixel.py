@@ -9,6 +9,7 @@ data = list(img.getdata())  # convert image data to a list of integers
 # convert that to 2D list (list of lists of integers)
 data = [data[offset:offset + WIDTH] for offset in range(0, WIDTH * HEIGHT, WIDTH)]
 
+print(paddingOneByOne(data))
 # At this point the image's pixels are all in memory and can be accessed
 # For example:
 print("pic 1")

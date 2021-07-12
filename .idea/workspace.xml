@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="890c2ca0-bdf1-448e-8b84-b9f4c0587c94" name="Default Changelist" comment="Problem with the else.">
-      <change afterPath="$PROJECT_DIR$/venv/count.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/drive.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/nna.py" afterDir="false" />
+    <list default="true" id="890c2ca0-bdf1-448e-8b84-b9f4c0587c94" name="Default Changelist" comment="fix the decoding">
+      <change beforePath="$PROJECT_DIR$/.idea/Stagnography.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Stagnography.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/baboon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/embeddingAndExtracting .py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/embeddingAndExtracting .py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/foo.png" beforeDir="false" afterPath="$PROJECT_DIR$/venv/foo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/image2pixel.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/image2pixel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/method.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/method.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/venv/methodmus.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/methodmus.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/string2picture.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/string2picture.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +52,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.drive">
+  <component name="RunManager" selected="Python.extracting">
     <configuration name="binaryString" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Stagnography" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -97,7 +95,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="embeddingAndExtracting " type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="embedding" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Stagnography" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -106,10 +104,31 @@
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/venv/embeddingAndExtracting .py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/venv/embedding.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="extracting" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Stagnography" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/venv/extracting.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -160,34 +179,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="myTry" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="Stagnography" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/venv/myTry.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.extracting" />
+        <item itemvalue="Python.embedding" />
         <item itemvalue="Python.drive" />
         <item itemvalue="Python.method" />
         <item itemvalue="Python.binaryString" />
-        <item itemvalue="Python.myTry" />
-        <item itemvalue="Python.embeddingAndExtracting " />
       </list>
     </recent_temporary>
   </component>

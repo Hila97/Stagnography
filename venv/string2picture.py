@@ -33,11 +33,11 @@ def bin2dec(x):  # from binary number (not string)
 def stringToImage(str, size):
     x = []
     for i in range(0, size, 8):
-        print("i", i)
+        # print("i", i)
         s = str[i:i + 8]
-        print(s)
+        # print(s)
         s = bin2dec(s)
-        print(s)
+        # print(s)
         x.append(s)
     return x
 
@@ -48,23 +48,23 @@ def decMatToBinArr(matrix):
             mat.append(str(format(y, '08b')))
 
 
-matrix = converImgToMatrix('lena.png')
+matrix = converImgToMatrix('eggs.png')
 print(matrix)
 mat = []
 decMatToBinArr(matrix)
-print(mat)
+# print(mat)
 res = "".join(mat)
 print(res)
 print("the length", len(res))
 size = len(res)
 ans = stringToImage(res, size)
-print(ans)
+# print(ans)
 arr = np.array(ans)
-print("arr",arr)
+# print("arr",arr)
 s=int(math.sqrt(size/8))
 print("s",s)
 matrix = arr.reshape(s, s)
-printMatrix(matrix)
+# printMatrix(matrix)
 array = np.array(matrix, dtype='uint8')
 new_image = Image.fromarray(array, 'L')
-new_image.save('try2.png')
+new_image.save('try.png')
