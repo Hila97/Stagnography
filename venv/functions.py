@@ -182,7 +182,7 @@ def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  
     Pm1 = []
     Pm1.append(0)
     for m in range(1, size):
-        if abs(P[m] - Pm2[m]) <= abs(P[m] - Pm3[m])  and 0 <= Pm2[m] <= 255:
+        if abs(P[m] - Pm2[m]) <= abs(P[m] - Pm3[m]) and 0 <= Pm2[m] <= 255:
             Pm1.append(Pm2[m])
         elif abs(P[m] - Pm3[m]) < abs(P[m] - Pm2[m]) and 0 <= Pm3[m] <= 255:
             Pm1.append(Pm3[m])
@@ -209,6 +209,7 @@ def startBlockEmbedding(matrix, startRow, startCol, position, secretInBinary):  
     matrix[startRow + 2][startCol] = Pm1[6]
     matrix[startRow + 2][startCol + 1] = Pm1[7]
     matrix[startRow + 2][startCol + 2] = Pm1[8]
+    # print("another block", matrix)
 
     return position
 
@@ -222,8 +223,8 @@ def tillnow(arr, lenTillNow):
     return sum-len(str(arr[0]))
 
 
-def startBlockExtraction(matrix, startRow, startCol, lengthOfSecret, lenTillNow):
 
+def startBlockExtraction(matrix, startRow, startCol, lengthOfSecret, lenTillNow):
 
     # step1
     P1ir = matrix[startRow + 1][startCol + 1]
@@ -269,6 +270,20 @@ def startBlockExtraction(matrix, startRow, startCol, lengthOfSecret, lenTillNow)
         sm.append(D1m[m] - L[m])
 
     # step 6
+    # compute the Kmsb of the message by the Klsb of p'ir
+    KmsbFromBegin = kLsb(dec2bin(P1ir))
+    y=k
+    if  tillnow([0], lenTillNow) >= lengthOfSecret:
+        y = lengthOfSecret - tillnow([0], lenTillNow)
+    diffrence=y-len(str(KmsbFromBegin))
+    temp = ''
+
+    if diffrence > 0:
+        for i in range(diffrence):
+            temp += '0'
+    begining=temp+str(KmsbFromBegin)
+
+
     # to binary
     smbin = []
     smbin.append(0)
@@ -295,23 +310,26 @@ def startBlockExtraction(matrix, startRow, startCol, lengthOfSecret, lenTillNow)
                 temp += '0'
         smbinWitht.append(temp + smbinString)
         # print("smbinwitht",smbinWitht)
+    print(smbinWitht)
     for m in range(1, size):
         message += smbinWitht[m]
     # print(message)
-    # compute the Kmsb of the message by the Klsb of p'ir
-    KmsbFromBegin = kLsb(dec2bin(P1ir))
-    y=k
-    if  tillnow(smbinWitht, lenTillNow) >= lengthOfSecret:
-        y = lengthOfSecret - tillnow(smbinWitht, lenTillNow)
-    diffrence=y-len(str(KmsbFromBegin))
-    temp = ''
-    if diffrence > 0:
-        for i in range(diffrence):
-            temp += '0'
-    begining=temp+str(KmsbFromBegin)
-    # print("k")
-    # print(begining)
+    # # compute the Kmsb of the message by the Klsb of p'ir
+    # KmsbFromBegin = kLsb(dec2bin(P1ir))
+    # y=k
+    # if  tillnow(smbinWitht, lenTillNow) >= lengthOfSecret:
+    #     y = lengthOfSecret - tillnow(smbinWitht, lenTillNow)
+    # diffrence=y-len(str(KmsbFromBegin))
+    # temp = ''
+    #
+    # if diffrence > 0:
+    #     for i in range(diffrence):
+    #         temp += '0'
+    # begining=temp+str(KmsbFromBegin)
+    print("k")
+    print(begining)
     message = str(begining) + message
+    # print("msg",message)
 
     return message
 
@@ -419,6 +437,7 @@ def embeddFirstBlock(matrix, lengthMsgInBits):
     matrix[startRow][startCol + 2] = Pm1[3]
     matrix[startRow + 1][startCol] = Pm1[4]
     matrix[startRow + 1][startCol + 1] = p1ir
+    print("first block", matrix)
 
 
 def extraxtFirstBlock(matrix):
@@ -502,7 +521,7 @@ def addZeros(size):
 
 
 def getMsg():  # get a message and find it binary length, no more than 12, if less than padding
-    msg = "why it is not working off"
+    msg =  "how are you im fine thank you and muss how are you im fine thank you and musshow are you im fine thank you and muss"
     msgBin = a2bits(msg)
     print("the message in binary: ")
     # msgBin=str(1100111010100111010111101001011001110110011101010011101011110100101100111011001110101001110101111010010110011101100111010100111010111101001011001110) #check exemple need to delete
