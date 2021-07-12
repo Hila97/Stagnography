@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="890c2ca0-bdf1-448e-8b84-b9f4c0587c94" name="Default Changelist" comment="fix the decoding">
-      <change beforePath="$PROJECT_DIR$/.idea/Stagnography.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Stagnography.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/image2pixel.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/image2pixel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/method.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/method.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/methodmus.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/methodmus.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/string2picture.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/string2picture.py" afterDir="false" />
-    </list>
+    <list default="true" id="890c2ca0-bdf1-448e-8b84-b9f4c0587c94" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -296,7 +288,13 @@
       <option name="presentableId" value="LOCAL‎00016" />
       <updated>1623243957141</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL‎00017" summary="separate files">
+      <created>1626078669683</created>
+      <option name="number" value="LOCAL‎00017" />
+      <option name="presentableId" value="LOCAL‎00017" />
+      <updated>1626078669683</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -327,6 +325,7 @@
     <MESSAGE value=".." />
     <MESSAGE value="fix the loops.." />
     <MESSAGE value="fix the decoding" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix the decoding" />
+    <MESSAGE value="separate files" />
+    <option name="LAST_COMMIT_MESSAGE" value="separate files" />
   </component>
 </project>
