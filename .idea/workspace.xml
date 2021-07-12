@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="890c2ca0-bdf1-448e-8b84-b9f4c0587c94" name="Default Changelist" comment="Arrange files, print I / O messages, delete unnecessary lines">
+    <list default="true" id="890c2ca0-bdf1-448e-8b84-b9f4c0587c94" name="Default Changelist" comment="delete unnecessary files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baboon.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lena.bmp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lena.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lena_Image.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lenna_(test_image).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/before.png" beforeDir="false" afterPath="$PROJECT_DIR$/venv/before.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/binary2StringAndString2binary.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/count.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/draw.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/drive.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/embeddingAndExtracting .py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/method.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/methodmus.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/vv.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/x.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/xy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/after.png" beforeDir="false" afterPath="$PROJECT_DIR$/venv/after.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/embedding.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/embedding.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/extracting.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/extracting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/functions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +43,7 @@
       <recent name="C:\Users\student\Desktop\סמסטר ב\אבטחת נתונים\פרויקט\Stagnography\venv" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.embedding">
+  <component name="RunManager" selected="Python.extracting">
     <configuration name="drive" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Stagnography" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -184,8 +172,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.embedding" />
         <item itemvalue="Python.extracting" />
+        <item itemvalue="Python.embedding" />
         <item itemvalue="Python.psnr" />
         <item itemvalue="Python.functions" />
         <item itemvalue="Python.drive" />
@@ -318,7 +306,13 @@
       <option name="presentableId" value="LOCAL‎00019" />
       <updated>1626109055722</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL‎00020" summary="delete unnecessary files">
+      <created>1626111945592</created>
+      <option name="number" value="LOCAL‎00020" />
+      <option name="presentableId" value="LOCAL‎00020" />
+      <updated>1626111945592</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -351,6 +345,7 @@
     <MESSAGE value="separate files" />
     <MESSAGE value="x" />
     <MESSAGE value="Arrange files, print I / O messages, delete unnecessary lines" />
-    <option name="LAST_COMMIT_MESSAGE" value="Arrange files, print I / O messages, delete unnecessary lines" />
+    <MESSAGE value="delete unnecessary files" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete unnecessary files" />
   </component>
 </project>

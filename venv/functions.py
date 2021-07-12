@@ -510,3 +510,44 @@ def getMsg(msg):  # get a message and find it binary length, no more than 12, if
 
     return msgBin, lenBinStr
 
+def getImg(imag):
+    img = Image.open(imag).convert('L')  # convert image to 8-bit grayscale
+    WIDTH, HEIGHT = img.size
+
+    data = list(img.getdata())  # convert image data to a list of integers
+    # convert that to 2D list (list of lists of integers)
+    data = [data[offset:offset + WIDTH] for offset in range(0, WIDTH * HEIGHT, WIDTH)]
+    # print(data)
+    # At this point the image's pixels are all in memory and can be accessed
+    # For example:
+    # print("pic 1")
+    # for row in data:
+    #     print(' '.join('{:3}'.format(value) for value in row))
+
+    msg = ""
+    for row in data:
+        for x in row:
+            # print(x, dec2bin(x))
+            numbin = str(dec2bin(x))
+            if len(numbin) < 8:
+                d = 8 - len(numbin)
+                for i in range(0, d):
+                    numbin = '0' + numbin
+            # print(numbin)
+            msg = msg + numbin
+    # print("msg:", msg)
+    msgBin = msg
+    print(msgBin)
+    lenMsg = len(msgBin)
+    print("the length of the message: ")
+    print(lenMsg)
+
+    lenBinStr = str(dec2bin(lenMsg))
+    if len(lenBinStr) > 12:
+        print('the massage is to big')
+        exit(1)
+    else:
+        size = 12 - len(lenBinStr)
+        lenBinStr = addZeros(size) + lenBinStr
+
+    return msgBin, lenBinStr

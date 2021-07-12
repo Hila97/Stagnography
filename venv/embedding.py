@@ -32,11 +32,21 @@ array = np.array(matrix, dtype='uint8')
 new_image = Image.fromarray(array, 'L')
 new_image.save('before.png')
 
-msg=input("please enter the message you want: ")
-# msg="This message is embedded in an image!"
-enc=encryptMsg(msg)
-print("the ecrypting: ",enc )
-msgBin, lenMsgBin = getMsg(enc)
+flag = int(input("hide msg-0, hide img-1: "))
+if flag == 0:
+    msg = input("please enter the message you want: ")
+    # msg="This message is embedded in an image!"
+    enc = encryptMsg(msg)
+    print("the ecrypting: ", enc)
+    msgBin, lenMsgBin = getMsg(enc)
+elif flag == 1:
+    imag=input("enter the name of the secret image")
+    msgBin, lenMsgBin = getImg(imag)
+else:
+    print("error")
+
+
+
 
 embeddFirstBlock(matrix, lenMsgBin)
 
