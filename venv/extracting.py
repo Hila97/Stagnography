@@ -55,7 +55,7 @@ def getImgBack(x):
 
 
 
-flag = int(input("hide msg-0, hide img-1: "))
+flag = int(input("extract msg-0, extract img-1: "))
 if flag == 1:
     getImgBack(x)
 elif flag == 0:
