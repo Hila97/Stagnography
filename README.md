@@ -8,8 +8,9 @@
 * [Authors](#Authors:)
 
 ## Introduction:
+The software implements the algorithms of the article **"A Spatial Domain Steganographic Approach Using Pixel Pair Differencing and LSB Substitution"**.<br />
 This system is software for encrypting a message or image within a grayscale image as well as extracting an image or message encrypted within an image.<br />
-The software has 2 operations: embedding and extraction, in both the cover image is divided into 3x3 blocks as a basis for the work of the algorithm proposed in the article **"A Spatial Domain Steganographic Approach Using Pixel Pair Differencing and LSB Substitution"**.<br />
+The software has 2 operations: embedding and extraction, in both the cover image is divided into 3x3 blocks as a basis for the work of the algorithm proposed in the article.<br />
 There are 2 options: embedding a message (string format) or embedding an image.<br /> 
 In the first block (top left corner) the length of the message or alternatively the dimensions of the image will be embedded depending on the type of data embedded and therefore there are restrictions on the length of the message / image size.<br /> 
 In the other blocks according to the method proposed in the article, the message / image is embedded according to the pairs of pixels in each block.
